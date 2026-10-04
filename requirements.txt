@@ -1,0 +1,13 @@
+# Core runtime dependencies for the monitor-com agent.
+# Windows is the supported target platform; cross-platform libs are used where
+# possible so the code is importable and testable on other OSes.
+
+mss>=9.0.1          # fast cross-platform screenshot capture
+pynput>=1.7.6       # global keyboard listener (used for COUNTS only)
+pystray>=0.19.5     # system tray icon for visibility
+Pillow>=10.0.0      # image handling / tray icon rendering
+PyYAML>=6.0         # config files
+psutil>=5.9.0       # process / foreground-app metadata
+
+# Windows-only: service hosting. Installed only on Windows.
+pywin32>=306; sys_platform == "win32"

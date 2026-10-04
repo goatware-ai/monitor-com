@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "monitor-com"
+version = "0.1.0"
+description = "Transparent, consent-based employee activity monitoring agent for Windows"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+    "mss>=9.0.1",
+    "pynput>=1.7.6",
+    "pystray>=0.19.5",
+    "Pillow>=10.0.0",
+    "PyYAML>=6.0",
+    "psutil>=5.9.0",
+    "pywin32>=306; sys_platform == 'win32'",
+]
+
+[project.scripts]
+monitor-com = "monitor_agent.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["monitor_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,53 @@
+# monitor-com configuration (example).
+# Copy to config.yaml and edit. All paths may use Windows environment variables
+# like %ProgramData% or %USERPROFILE%.
+
+# Where data is stored. The agent writes a SQLite DB and a screenshots/ folder
+# under this root.
+storage:
+  root: "%ProgramData%\\monitor-com"
+  database: "monitor.db"
+
+# Consent / transparency. The agent will NOT start collecting until consent is
+# acknowledged. On first run it shows a notice; acknowledging writes a record to
+# the database. You may also pre-acknowledge here if your deployment records
+# consent out of band (e.g. a signed acceptable-use policy) — but you remain
+# responsible for having a lawful basis and giving notice.
+consent:
+  # If true, skip the interactive notice (e.g. for managed service deployments
+  # where consent was captured by your onboarding/AUP process).
+  preacknowledged: false
+  # Text shown to the user in the notice and the tray "What is monitored" screen.
+  notice: >
+    This company-managed device is monitored for security and productivity.
+    The following is collected: periodic screenshots, visited website
+    addresses, and keyboard activity levels (counts only, not what you type).
+    Contact your IT administrator with questions.
+  # Organization/administrator contact shown in the notice.
+  contact: "it-support@example.com"
+
+# Screenshot capture.
+screenshots:
+  enabled: true
+  interval_seconds: 300        # how often to capture
+  all_monitors: true           # capture every monitor, or just the primary
+  downscale_width: 1280        # 0 = full resolution; otherwise max width in px
+  format: "png"                # png or jpeg
+  jpeg_quality: 70             # used only when format == jpeg
+
+# Browser URL history collection.
+browser:
+  enabled: true
+  poll_seconds: 600            # how often to read browser history databases
+  browsers: ["chrome", "edge", "firefox"]  # which browsers to read
+
+# Keystroke ACTIVITY counting. Counts key presses per window; never records
+# which keys. There is no key-content logging.
+keystrokes:
+  enabled: true
+  window_seconds: 60           # aggregation window (per-minute by default)
+
+# Data retention. Old data is purged automatically. 0 = keep forever.
+retention:
+  days: 30
+  purge_check_hours: 24        # how often to run the purge
